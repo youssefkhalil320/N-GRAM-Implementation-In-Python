@@ -1,12 +1,14 @@
+import time
+import random
 from modules.text_processor import TextProcessor
 from model.ngram import NgramModel
+from train import create_ngram_model
 
-# text_processor = TextProcessor()
-# text = "This is a sample text for n-gram generation."
-# tokens = text_processor.tokenize(text)
-# ngrams = text_processor.get_ngrams(3, tokens)
-# print(ngrams)
-
-model = NgramModel(3)
-text = "This is a sample text for n-gram generation."
-model.update(text)
+start = time.time()
+m = create_ngram_model(6, '../data/Frankenstein.txt')
+print(f'Language Model creating time: {time.time() - start}')
+start = time.time()
+random.seed(7)
+print(f'{"="*50}\nGenerated text:')
+print(m.generate_text(20))
+print(f'{"="*50}')
