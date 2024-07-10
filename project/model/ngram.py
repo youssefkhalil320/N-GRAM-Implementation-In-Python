@@ -25,3 +25,14 @@ class NgramModel(object):
             prev_words, target_word = ngram
             self.context[prev_words].append(target_word)
             self.context_counter[prev_words] += 1.0
+
+    def prob(self, context, token):
+        """
+        Calculates probability of a candidate token to be generated given a context
+        :return: conditional probability
+        """
+        count_of_token = self.ngram_counter.get((context, token), 0.0)
+        count_of_context = self.context_counter.get(context, 0.0)
+        if count_of_context == 0:
+            return 0.0
+        return count_of_token / count_of_context
