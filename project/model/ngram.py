@@ -1,3 +1,4 @@
+import random
 from collections import defaultdict
 from modules.text_processor import TextProcessor
 
@@ -36,3 +37,16 @@ class NgramModel(object):
         if count_of_context == 0:
             return 0.0
         return count_of_token / count_of_context
+
+    def random_token(self, context):
+        """
+        Given a context we "semi-randomly" select the next word to append in a sequence
+        :param context:
+        :return:
+        """
+        if context not in self.context:
+            return '<END>'
+
+        tokens = self.context[context]
+        probs = [self.prob(context, token) for token in tokens]
+        return random.choices(tokens, weights=probs, k=1)[0]
