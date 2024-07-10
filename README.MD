@@ -9,7 +9,18 @@ This repository contains a simple yet efficient implementation of an N-gram lang
 - Handling Start Tags: Use of <START> tags to manage the beginning of sentences.
 - Efficient Inference: Optimized code to reduce computation time and enhance inference efficiency.
 
-# using 
+# usage
+```bash
+git clone https://github.com/youssefkhalil320/N-GRAM-Implementation-In-Python.git
+```
+
+```bash
+cd project
+```
+
+```bash
+python main.py
+```
 
 # Contributing
 Contributions are welcome! If you have any suggestions or improvements, please submit a pull request or open an issue.
