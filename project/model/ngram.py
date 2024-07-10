@@ -50,3 +50,23 @@ class NgramModel(object):
         tokens = self.context[context]
         probs = [self.prob(context, token) for token in tokens]
         return random.choices(tokens, weights=probs, k=1)[0]
+
+    def generate_text(self, token_count: int):
+        """
+        :param token_count: number of words to be produced
+        :return: generated text
+        """
+        n = self.n
+        context_queue = (n - 1) * ['<START>']
+        result = []
+        for _ in range(token_count):
+            context = tuple(context_queue)
+            obj = self.random_token(context)
+            result.append(obj)
+            if n > 1:
+                context_queue.pop(0)
+                if obj == '.':
+                    context_queue = (n - 1) * ['<START>']
+                else:
+                    context_queue.append(obj)
+        return ' '.join(result)
